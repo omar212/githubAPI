@@ -35,7 +35,7 @@ The API should have endpoints that meet these requirements.
 
 ```http
 Method: GET
-Path: /heath
+Path: /health
 ```
 
 ```json
