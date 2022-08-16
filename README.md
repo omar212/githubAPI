@@ -73,7 +73,7 @@ Path: /api/v1/github/{owner}/{repo}/issue/{issue_number}
 ```http
 
 Method: GET
-Path: /api/v1/github/{owner}/{repo}/issue/{issue_number}
+Path: /api/v1/github/{owner}/{repo}/issue/{issue_number}/image
 ```
 
 ```json
@@ -90,7 +90,7 @@ Path: /api/v1/github/{owner}/{repo}/issue/{issue_number}
 
 ```http
 Method: POST
-Path: `/api/v1/github/{owner}/{repo}/issues/{issue_number}comment`
+Path: `/api/v1/github/{owner}/{repo}/issues/{issue_number}/comment`
 Body: 
 {
   "body":<String>
