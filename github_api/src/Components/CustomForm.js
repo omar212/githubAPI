@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 
 import "./styles.css";
 
-function CustomCommentForm(props) {
+function CustomForm(props) {
   const  { createCustomIssue,containsImage, createIssueComment, imageForm, commentForm, issueForm } = props;
   const {
     register,
@@ -87,4 +87,4 @@ function CustomCommentForm(props) {
   );
 }
 
-export default CustomCommentForm;
+export default CustomForm;
