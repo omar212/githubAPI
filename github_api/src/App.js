@@ -20,7 +20,7 @@ function App() {
   const [imageForm, setImageForm] = useState(false);
   const [commentForm, setCommentForm] = useState(false);
   const [title, setTitle] = useState('');
-  const [repo, setRepo] = useState('HerQuest');
+  const [repo, setRepo] = useState('interview-takehome-2022');
 
 
   const octokit = new Octokit({
@@ -28,7 +28,7 @@ function App() {
   })
 
   const authenticateUser = () =>  {
-    githubAPI.health('omar212').then(response => {
+    githubAPI.health('dademarc').then(response => {
       const { data, status } = response;
       console.log('data: ', data)
 
@@ -61,7 +61,7 @@ function App() {
       if (data && status === 200) {
         setIssues(data)
       } else {
-        setTitle('No Data Found');
+        setTitle('No Issues Found');
       }
       setLoading(false)
     });
