@@ -20,7 +20,7 @@ function App() {
   const [imageForm, setImageForm] = useState(false);
   const [commentForm, setCommentForm] = useState(false);
   const [title, setTitle] = useState('');
-  const [repo, setRepo] = useState('interview-takehome-2022');
+  const [repo, setRepo] = useState('HerQuest');
 
 
   const octokit = new Octokit({
@@ -28,7 +28,7 @@ function App() {
   })
 
   const authenticateUser = () =>  {
-    githubAPI.health('dademarc').then(response => {
+    githubAPI.health('omar212').then(response => {
       const { data, status } = response;
       console.log('data: ', data)
 
