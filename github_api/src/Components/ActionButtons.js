@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 
 export default function ActionButtons(props)  {
 
-    const {fetchIssues, createIssue, showCustomImageForm, showCustomForm, showCustomCommentForm } = props;
+    const {fetchIssues, createIssue, showCustomImageForm, showCustomForm, showCustomCommentForm, showUserForm } = props;
 
     return (
         <Stack spacing={2} direction="column">
@@ -15,6 +15,7 @@ export default function ActionButtons(props)  {
             <Button onClick={showCustomForm} variant="contained">Create Custom Issue</Button>
             <Button onClick={showCustomCommentForm} variant="contained">Create Comment On Issue</Button>
             <Button onClick={showCustomImageForm} variant="outlined">Check for Image</Button>
+            <Button onClick={showUserForm} variant="contained" style={{backgroundColor: 'red'}}>Change User/Repo</Button>
         </Stack>
     )
 }

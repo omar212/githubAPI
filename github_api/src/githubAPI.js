@@ -51,7 +51,7 @@ export default {
             console.log('res: ', res )
 
             response = {
-                data: res.data,
+                userData: res.data,
                 status: res.status
             };
 
@@ -60,6 +60,29 @@ export default {
         }
 
         console.log(`⚠️ STATUS fetchUser() ${response.status}`);
+
+        return response;
+    },
+
+    checkRepo: async (username, repo) => {
+        const URL = `https://api.github.com/repos/${username}/${repo}`;
+        let response = {};
+
+        try {
+            const res = await axios(URL, PARAMS({ methodType: 'GET' }));
+            
+            console.log('res: ', res )
+
+            response = {
+                repoData: res.data,
+                status: res.status
+            };
+            
+        } catch (error) {
+            console.log(error.toString());
+        }
+
+        console.log(`⚠️ STATUS checkRepo() ${response.status}`);
 
         return response;
     },

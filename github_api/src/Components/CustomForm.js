@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import "./styles.css";
 
 function CustomForm(props) {
-  const  { createCustomIssue,containsImage, createIssueComment, imageForm, commentForm, issueForm } = props;
+  const  { authenticateUser, createCustomIssue,containsImage, createIssueComment, imageForm, commentForm, issueForm, userForm } = props;
   const {
     register,
     handleSubmit,
@@ -23,6 +23,8 @@ function CustomForm(props) {
         containsImage(data.issueNumber);
     } else if (issueForm) {
         createIssueComment(data.issueNumber, data.issue);
+    } else if (userForm) {
+        authenticateUser(data.user, data.repo);
     }
     
   }; // your form submit function which will invoke after successful validation
@@ -32,7 +34,7 @@ function CustomForm(props) {
   return (
     
         issueForm ? (
-            <form onSubmit={handleSubmit(onSubmit, 'comment')}>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 {/* register your input into the hook by invoking the "register" function */}
                 <div className="input-span">
             
@@ -52,7 +54,7 @@ function CustomForm(props) {
             </form>
 
         ) : commentForm ? (
-            <form onSubmit={handleSubmit(onSubmit, 'issue')}>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 {/* register your input into the hook by invoking the "register" function */}
                 <div className="input-span">
                 <span>Title</span>
@@ -69,7 +71,7 @@ function CustomForm(props) {
                 <input type="submit" />
             </form>
         ) : imageForm ? (
-            <form onSubmit={handleSubmit(onSubmit, 'image')}>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 {/* register your input into the hook by invoking the "register" function */}
                 <div className="input-span">
             
@@ -81,9 +83,22 @@ function CustomForm(props) {
         
                 <input type="submit" />
             </form>
-        ) : ""
+        ) : userForm ? (
+            <form onSubmit={handleSubmit(onSubmit)}>
+                {/* register your input into the hook by invoking the "register" function */}
+                <div className="input-span">
+                <span>User</span>
+                <input defaultValue="" {...register("user", { required: true })} />
+                {errors.user && <p>This field is required</p>}
 
-    
+                <span>Repo</span>
+                <input defaultValue="" {...register("repo", { required: true })} />
+                {errors.repo && <p>This field is required</p>}
+                </div>
+
+                <input type="submit" />
+            </form>
+        ) : ""    
   );
 }
 

@@ -11,13 +11,14 @@ import { useForm } from "react-hook-form";
 
 function App() {
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState('omar212');
   const [loading, setLoading] = useState(false);
   const [issues, setIssues] = useState([]);
   const [form, setForm] = useState(false);
   const [showAllIssues, setShowAllIssues] = useState(false);
   const [issueForm, setIssueForm] = useState(false);
   const [imageForm, setImageForm] = useState(false);
+  const [userForm, setUserForm] = useState(false);
   const [commentForm, setCommentForm] = useState(false);
   const [title, setTitle] = useState('');
   const [repo, setRepo] = useState('HerQuest');
@@ -27,17 +28,37 @@ function App() {
     auth: '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',
   })
 
-  const authenticateUser = () =>  {
-    githubAPI.health('omar212').then(response => {
-      const { data, status } = response;
-      console.log('data: ', data)
+  const authenticateUser = (user, repo) =>  {
+    githubAPI.health(user || 'omar212').then(response => {
+      const { userData, status } = response;
+      console.log('userData: ', userData)
 
-      if (data && status === 200) {
-        setUser(data.login);
+      if (userData && status === 200) {
+      
+        githubAPI.checkRepo(user || 'omar212', repo || 'HerQuest').then(response => {
+          const { repoData, status } = response;
+          console.log('repoData: ', repoData, 'status: ', status)
+
+          if (repoData && status === 200) {
+            setUser(userData.login)
+            setRepo(repo || 'HerQuest');
+            setLoading(false);
+            setTitle('')
+            setForm(false);
+            setTitle('Repo changed')
+          } else {
+            setLoading(false);
+            setUser('No User Found');
+            setRepo('');
+            setTitle('No Repo Found');
+          }
+        })
+
       } else {
         setUser('No User Found');
       }
     })
+    setShowAllIssues(false)
   }
 
   useEffect(() => {
@@ -47,7 +68,6 @@ function App() {
   const reset = () => {
     setLoading(true)
     setTitle('');
-    
   }
   const fetchIssues = () => {
     reset();
@@ -198,6 +218,15 @@ function App() {
     setIssueForm(false)
     setCommentForm(false)
   }
+
+  const showUserForm = () => {
+    setTitle('')
+    setForm(true)
+    setUserForm(true)
+    setIssueForm(false)
+    setCommentForm(false)
+    setImageForm(false)
+  }
   
   return (
     <div className="App">
@@ -205,13 +234,18 @@ function App() {
         <h1>{user}</h1> 
         <div>
         {
-          user && user !== '' || user === 'No User Found' ? (
+            user && user !== 'No User Found' ? (
             <CheckIcon style={{fill: 'green'}} />
           ) : (
             <CloseIcon style={{fill: 'red'}} />
           )
         }
         </div>
+        <br />
+      </header>
+      <header>
+      
+        <h3>Repo: {repo}</h3>
       </header>
       <div className="page">
         <ActionButtons 
@@ -220,6 +254,7 @@ function App() {
           showCustomImageForm={showImageForm}
           showCustomCommentForm={showCustomIssueForm}
           showCustomForm={showCustomCommentForm}
+          showUserForm={showUserForm}
         />
         
         {
@@ -231,17 +266,17 @@ function App() {
                       imageForm={imageForm} 
                       commentForm={commentForm}
                       issueForm={issueForm}
+                      userForm={userForm}
                       createCustomIssue={createCustomIssue}
                       createIssueComment={createIssueComment}
                       containsImage={containsImage}
+                      authenticateUser={authenticateUser}
                   />
         }
 
         {
           title && <h1>{title}</h1>
         }
-        
-          
       </div>
       
     </div>

@@ -22,11 +22,11 @@ function DisplayIssues(props) {
         
             loading ? (
               <div>Loading...</div>
-            ) : form ? (
+            ) : form && issues.length !== 0  ? (
                 <></>
             ) : issues.length > 0 ? (
                 <div>
-                    <p style={{ paddingBottom: '2%'}}>All Issues</p>
+                    <h1 style={{ paddingBottom: '2%'}}>All Issues</h1>
                     <Grid 
                         container 
                         alignItems="center" 
@@ -53,7 +53,7 @@ function DisplayIssues(props) {
                     </Grid>
                 </div>
             ) : (
-              <></>
+              <h1>No Issues Found</h1>
             ) 
     )
 }
