@@ -47,7 +47,7 @@ function App() {
             setLoading(false);
             setTitle('')
             setForm(false);
-            setTitle('Repo changed')
+            setShowLink(false)
           } else {
             setLoading(false);
             setUser('No User Found');
@@ -75,6 +75,8 @@ function App() {
     reset();
     setShowAllIssues(true)
     setForm(false)
+    setShowLink(false)
+
     
     githubAPI.fetchIssues(user, repo).then(response => {
       const { data, status } = response;
