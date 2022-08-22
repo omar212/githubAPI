@@ -15,8 +15,6 @@ function CustomForm(props) {
   } = useForm();
   
   const onSubmit = (data) => {
-    console.log('onSubmit: ',  data);
-
     if (commentForm) {
         createCustomIssue(data.title, data.comment);
     } else if (imageForm) {
@@ -26,10 +24,7 @@ function CustomForm(props) {
     } else if (userForm) {
         authenticateUser(data.user, data.repo);
     }
-    
   }; // your form submit function which will invoke after successful validation
-
-  // console.log(watch("COMMENT")); // you can watch individual input by pass the name of the input
 
   return (
     

@@ -33,13 +33,11 @@ function App() {
   const authenticateUser = (user, repo) =>  {
     githubAPI.health(user || 'omar212').then(response => {
       const { userData, status } = response;
-      console.log('userData: ', userData)
 
       if (userData && status === 200) {
       
         githubAPI.checkRepo(user || 'omar212', repo || 'HerQuest').then(response => {
           const { repoData, status } = response;
-          console.log('repoData: ', repoData, 'status: ', status)
 
           if (repoData && status === 200) {
             setUser(userData.login)
@@ -80,7 +78,6 @@ function App() {
     
     githubAPI.fetchIssues(user, repo).then(response => {
       const { data, status } = response;
-      console.log('data: ', data, 'status: ', status)
 
       if (data && status === 200) {
         setIssues(data)
@@ -99,7 +96,6 @@ function App() {
 
     githubAPI.createIssue(user, repo, 'Default Title', 'Default Comment').then(response => {
       const { data, status } = response;
-      console.log('data: ', data, 'status: ', status)
 
       if (data && status === 201) {
         setTitle('Issue Created');
@@ -117,7 +113,6 @@ function App() {
 
     githubAPI.createCustomIssue(user, repo, title, comment).then(response => {
       const { data, status } = response;
-      console.log('data: ', data, 'status: ', status)
 
       if (data && status === 201) {
         setTitle('Issue Created');
@@ -155,7 +150,6 @@ function App() {
 
     githubAPI.createIssueOnComment(user, repo, issueNumber, comment).then(response => {
       const { data, status } = response;
-      console.log('data: ', data, 'status: ', status)
 
       if (data && status === 201) {
         setTitle(`Comment created on Issue # ${issueNumber}`);
@@ -177,13 +171,12 @@ function App() {
 
     githubAPI.containsImage(user, repo, issueNumber).then(response => {
       const { data, status } = response;
-      console.log('data: ', data, 'status: ', status)
-      // debugger
+
       if (data && status === 200) {
         let body = data.body;
         let splitBody = body.split(' ');
         let image = splitBody.find(word => word.includes('!['))?.match(/\((.*)\)/).pop()
-        console.log("image: ", image)
+
         if(image) {
           checkIfImageExists(image,(exists) => {
             if (exists) {
