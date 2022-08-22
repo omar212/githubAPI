@@ -91,6 +91,7 @@ function App() {
   const createIssue = () => {
     reset();
     setShowAllIssues(false)
+    setForm(false)
 
     githubAPI.createIssue(user, repo, 'Default Title', 'Default Comment').then(response => {
       const { data, status } = response;
