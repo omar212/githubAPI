@@ -17,30 +17,6 @@ auth: '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',
 
 export default {
 
-    fetchIssues: async (username, repo) => {
-        const URL = `https://api.github.com/repos/${username}/${repo}/issues`;
-        let response = {};
-        
-        try {
-            const res = await axios(URL, PARAMS({ methodType: 'GET' }));
-
-            console.log('res: ', res )
-
-            response = {
-                data: res.data,
-                status: res.status
-            };
-
-        } catch (error) {
-            console.log(error.toString());
-        }
-
-        console.log(`⚠️ STATUS fetchIssues() ${response.status}`);
-
-        return response;
-    },
-    
-    
     health: async (username) => {
         const URL = `https://api.github.com/users/${username}`;
         let response = {};
@@ -60,6 +36,29 @@ export default {
         }
 
         console.log(`⚠️ STATUS fetchUser() ${response.status}`);
+
+        return response;
+    },
+
+    fetchIssues: async (username, repo) => {
+        const URL = `https://api.github.com/repos/${username}/${repo}/issues`;
+        let response = {};
+        
+        try {
+            const res = await axios(URL, PARAMS({ methodType: 'GET' }));
+
+            console.log('res: ', res )
+
+            response = {
+                data: res.data,
+                status: res.status
+            };
+
+        } catch (error) {
+            console.log(error.toString());
+        }
+
+        console.log(`⚠️ STATUS fetchIssues() ${response.status}`);
 
         return response;
     },

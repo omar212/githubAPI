@@ -18,7 +18,7 @@ function CustomForm(props) {
     console.log('onSubmit: ',  data);
 
     if (commentForm) {
-        createCustomIssue(data.issueNumber, data.comment);
+        createCustomIssue(data.title, data.comment);
     } else if (imageForm) {
         containsImage(data.issueNumber);
     } else if (issueForm) {

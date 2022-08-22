@@ -19,6 +19,8 @@ function App() {
   const [issueForm, setIssueForm] = useState(false);
   const [imageForm, setImageForm] = useState(false);
   const [userForm, setUserForm] = useState(false);
+  const [link, setLink] = useState('');
+  const [showLink, setShowLink] = useState(false);
   const [commentForm, setCommentForm] = useState(false);
   const [title, setTitle] = useState('');
   const [repo, setRepo] = useState('HerQuest');
@@ -99,6 +101,8 @@ function App() {
 
       if (data && status === 201) {
         setTitle('Issue Created');
+        setLink(data.html_url);
+        setShowLink(true);
       } else {
         setTitle('No Data Found');
       }
@@ -115,6 +119,8 @@ function App() {
 
       if (data && status === 201) {
         setTitle('Issue Created');
+        setLink(data.html_url);
+        setShowLink(true);
       } else {
         setTitle('No Data Found');
       }
@@ -151,6 +157,8 @@ function App() {
 
       if (data && status === 201) {
         setTitle(`Issue Created On Comment ${issueNumber}`);
+        setLink(data.html_url);
+        setShowLink(true);
       } else if(status === 404) {
         setTitle('No Issue Found');
       } else {
@@ -203,6 +211,7 @@ function App() {
     setIssueForm(true)
     setCommentForm(false)
     setImageForm(false)
+    setShowLink(false)
   }
   const showCustomCommentForm = () => {
     setTitle('')
@@ -210,6 +219,7 @@ function App() {
     setCommentForm(true)
     setIssueForm(false)
     setImageForm(false)
+    setShowLink(false)
   }
 
   const showImageForm = () => {
@@ -218,6 +228,7 @@ function App() {
     setImageForm(true)
     setIssueForm(false)
     setCommentForm(false)
+    setShowLink(false)
   }
 
   const showUserForm = () => {
@@ -227,6 +238,7 @@ function App() {
     setIssueForm(false)
     setCommentForm(false)
     setImageForm(false)
+    setShowLink(false)
   }
   
   return (
@@ -277,6 +289,9 @@ function App() {
 
         {
           title && <h1>{title}</h1>
+        }
+        {
+          showLink && <a href={link} target="_blank">View Issue</a>
         }
       </div>
       
