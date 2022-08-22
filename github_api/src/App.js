@@ -156,7 +156,7 @@ function App() {
       console.log('data: ', data, 'status: ', status)
 
       if (data && status === 201) {
-        setTitle(`Issue Created On Comment ${issueNumber}`);
+        setTitle(`Comment created on Issue # ${issueNumber}`);
         setLink(data.html_url);
         setShowLink(true);
       } else if(status === 404) {

@@ -22,7 +22,7 @@ function CustomForm(props) {
     } else if (imageForm) {
         containsImage(data.issueNumber);
     } else if (issueForm) {
-        createIssueComment(data.issueNumber, data.issue);
+        createIssueComment(data.issueNumber, data.comment);
     } else if (userForm) {
         authenticateUser(data.user, data.repo);
     }
